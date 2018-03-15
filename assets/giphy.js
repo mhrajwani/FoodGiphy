@@ -1,13 +1,14 @@
 var food = [];
-
+var mgif= 10;
 function renderButtons() {
     $("#food").empty();
-
+    //ngif=$("#food-ngif").val().trim();
     for (var i = 0; i < food.length; i++) {
       
       var fooditem = $("<button>");
       fooditem.addClass("food1");
       fooditem.attr("data-food", food[i]);
+      //fooditem.attr("data-gif", ngif);
       fooditem.text(food[i]);
       $("#food").append(fooditem);
     }
@@ -17,6 +18,7 @@ function renderButtons() {
     event.preventDefault();
 
     var item = $("#food-input").val().trim();
+    mgif = $("#food-ngif").val()
     food.push(item);
     renderButtons();
   });
@@ -24,9 +26,9 @@ function renderButtons() {
   function foodfunction() {
     $("#food-view").empty();
     var food2 = $(this).attr("data-food");
-
+    //var mgif = $(this).attr("data-gif");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-      food2 + "&api_key=dc6zaTOxFJmzC&limit=10";
+      food2 + "&api_key=dc6zaTOxFJmzC&limit=" + mgif;
     
       $.ajax({
         url: queryURL,
@@ -62,10 +64,7 @@ function renderButtons() {
         $(this).attr("src", image);
         $(this).attr("data-state","animate");
 
-
-        console.log(image);
       } else {
-        console.log("else");
         var image = $(this).attr("data-still");
         $(this).attr("src", image);
         $(this).attr("data-state","still");
